@@ -6,7 +6,7 @@
 /*   By: dbauduin <dbauduin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/14 15:12:28 by dbauduin          #+#    #+#             */
-/*   Updated: 2017/04/15 10:57:11 by dbauduin         ###   ########.fr       */
+/*   Updated: 2017/04/15 11:35:20 by dbauduin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,17 @@
 
 void	ft_putnbr_fd(int nb, int fd)
 {
-	if (nb == -2147483648)
-	{
-		ft_putstr_fd("-2147483648", fd);
-		return ;
-	}
-	else if (nb == 2147483647)
-	{
-		write (fd, "2147483647", 10);
-		return ;
-	}
+	unsigned int n;
+
+	n = nb;
 	if (nb < 0)
 	{
-		nb = -nb;
-		write(fd, "-", 1);
+		ft_putchar_fd('-', fd);
+		n *= -1;
 	}
-	else if (nb > 9)
-		ft_putnbr_fd(nb / 10, fd);
-	ft_putchar_fd((nb % 10) + '0', fd);
+	if (n >= 10)
+	{
+		ft_putnbr_fd((n / 10), fd);
+	}
+	ft_putchar_fd(((n % 10) + '0'), fd);
 }
