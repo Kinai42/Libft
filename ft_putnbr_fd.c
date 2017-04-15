@@ -6,7 +6,7 @@
 /*   By: dbauduin <dbauduin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/14 15:12:28 by dbauduin          #+#    #+#             */
-/*   Updated: 2017/04/15 12:09:45 by dbauduin         ###   ########.fr       */
+/*   Updated: 2017/04/15 12:13:44 by dbauduin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,5 +26,5 @@ void	ft_putnbr_fd(int n, int fd)
 	{
 		ft_putnbr_fd((nb / 10), fd);
 	}
-	ft_putchar_fd(((nB % 10) + '0'), fd);
+	ft_putchar_fd(((nb % 10) + '0'), fd);
 }
