@@ -6,7 +6,7 @@
 /*   By: dbauduin <dbauduin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/14 15:17:32 by dbauduin          #+#    #+#             */
-/*   Updated: 2017/04/14 20:35:12 by dbauduin         ###   ########.fr       */
+/*   Updated: 2017/04/15 11:58:31 by dbauduin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,9 @@
 
 void	ft_putendl(char const *s)
 {
-	ft_putstr(s);
-	write(1, "\n", 1);
+	if (s)
+	{
+		ft_putstr(s);
+		write(1, "\n", 1);
+	}
 }
