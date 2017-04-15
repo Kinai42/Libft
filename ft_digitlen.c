@@ -1,20 +1,30 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_digitlen.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dbauduin <dbauduin@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/04/14 15:13:47 by dbauduin          #+#    #+#             */
+/*   Updated: 2017/04/15 08:49:45 by dbauduin         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_digitlen(int n)
+unsigned int	ft_digitlen(int *n)
 {
-	int	size;
+	int				size;
+	long long int	ncpy;
 
-	size = 0;
-	if (n < 0)
+	size = 1;
+	if (*n < 0)
 	{
 		size += 1;
-		n = -n;
+		*n *= -1;
 	}
-	while (n != 0)
-	{
+	ncpy = *n;
+	while (ncpy /= 10)
 		size++;
-		n /= 10;
-	}
-	return (size += 1);
+	return (size);
 }

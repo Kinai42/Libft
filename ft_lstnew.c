@@ -6,12 +6,11 @@
 /*   By: dbauduin <dbauduin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/13 21:09:45 by dbauduin          #+#    #+#             */
-/*   Updated: 2017/04/13 21:09:48 by dbauduin         ###   ########.fr       */
+/*   Updated: 2017/04/14 17:32:59 by dbauduin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdlib.h>
 
 t_list	*ft_lstnew(void const *content, size_t content_size)
 {
@@ -21,7 +20,7 @@ t_list	*ft_lstnew(void const *content, size_t content_size)
 		return (NULL);
 	if (content)
 	{
-		if (!(elmt->content = (void *)memalloc(sizeof(content_size))))
+		if (!(list->content = ft_memalloc(sizeof(content_size))))
 			return (NULL);
 		ft_memcpy(list->content, content, content_size);
 		list->content_size = content_size;

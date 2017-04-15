@@ -6,7 +6,7 @@
 /*   By: dbauduin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/11 02:31:23 by dbauduin          #+#    #+#             */
-/*   Updated: 2017/04/11 23:23:24 by dbauduin         ###   ########.fr       */
+/*   Updated: 2017/04/15 02:32:47 by dbauduin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ char	*ft_strcpy(char *dst, const char *src)
 	unsigned long int	i;
 
 	i = 0;
-	while (*src)
+	while (src[i])
 	{
 		dst[i] = src[i];
 		i++;

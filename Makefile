@@ -1,4 +1,4 @@
-# **************************************************************************** #
+:x
 #                                                                              #
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
@@ -6,24 +6,38 @@
 #    By: dbauduin <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/04/10 19:02:58 by dbauduin          #+#    #+#              #
-#    Updated: 2017/04/11 21:00:21 by dbauduin         ###   ########.fr        #
+#    Updated: 2017/04/14 21:16:16 by dbauduin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
+CC		=	gcc
+
+CFLAGS	=	-I./include -Wall -Werror -Wextra
+
+RM		=	/bin/rm
+
 NAME	=	libft.a
 
-SOURCE1	=	ft_*.c
+SRC		=	$(wildcard *.c)
 
-OBJET	=	%.o: %.c
+OBJ		=	$(subst .c,.o,$(SRC))
 
-all		:
-	gcc -c -Werror -Wall -Wextra $(SOURCE1) $(SOURCE2) -I includes/
-	ar rc $(NAME) $(OBJET)
+RED		=	@echo "\033[31m Clean\n\033[0m"
+GREEN	=	@echo "\033[32m Compile\033[0m"
+
+$(NAME)	:
+	@$(CC) -c $(CFLAGS) $(SRC)
+	@ar rc $(NAME) $(OBJ)
+	@ranlib $(NAME)
+	$(GREEN)
+
+all		:	$(NAME)
 
 clean	:
-	rm -Rf $(OBJET)
+	@$(RM) -rf $(OBJ) core *~
+	$(RED)
 
 fclean	:	clean
-	rm -Rf $(NAME)
+	@$(RM) -rf $(NAME)
 
 re		:	fclean all

@@ -6,22 +6,38 @@
 /*   By: dbauduin <dbauduin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/12 22:39:08 by dbauduin          #+#    #+#             */
-/*   Updated: 2017/04/13 00:53:38 by dbauduin         ###   ########.fr       */
+/*   Updated: 2017/04/15 06:28:40 by dbauduin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strtrim(char const *s)
+static int	blankcheck(const int c)
 {
-	unsigned int	start;
-	unsigned int	end;
+	return (c == ' ' || c == '\t' || c == '\n');
+}
 
-	start = 0;
-	end = ft_strlen(s);
-	while ((s[start] == ' ' || s[start] == '\n' || s[start] == '\t') && s[start])
-		start++;
-	while ((s[end] == ' ' || s[end] == '\n' || s[end] == '\t') && s[end])
-		end--;
-	return (ft_strsub(s, start, (end - start + 1)));
+char		*ft_strtrim(const char *s)
+{
+	unsigned int	i;
+	unsigned long	j;
+	size_t			k;
+	char			*s2;
+
+	if (!s)
+		return (NULL);
+	i = 0;
+	k = ft_strlen(s);
+	while (blankcheck(s[k - 1]))
+		k--;
+	while (blankcheck(s[i]))
+		i++;
+	if (!s[i])
+	{
+		s2 = ft_strnew(0);
+		return (s2);
+	}
+	j = k - i;
+	s2 = ft_strsub(s, i, j);
+	return (s2);
 }

@@ -6,7 +6,7 @@
 /*   By: dbauduin <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/13 00:44:37 by dbauduin          #+#    #+#             */
-/*   Updated: 2017/04/13 00:44:42 by dbauduin         ###   ########.fr       */
+/*   Updated: 2017/04/15 03:08:24 by dbauduin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,26 +14,25 @@
 
 char	*ft_strstr(const char *s1, const char *s2)
 {
-	char *cp1;
-	char *cp2;
+	size_t	i;
+	size_t	j;
+	size_t	k;
 
+	i = 0;
 	if (!*s2)
-		return ((void *)s1);
-	while (*s1)
+		return ((char *)s1);
+	while (s1[i])
 	{
-		if (*s1 == *s2)
+		j = 0;
+		k = i;
+		while (s1[k] == s2[j])
 		{
-			cp1 = (void *)s1;
-			cp2 = (void *)s2;
-			while (*cp1 && *cp2 && *cp1 == *cp2)
-			{
-				cp1++;
-				cp2++;
-			}
-			if (!*cp1)
-				return ((void *)s1);
+			j++;
+			k++;
+			if (!s2[j])
+				return (&((char *)s1)[i]);
 		}
-		s1++;
+		i++;
 	}
 	return (NULL);
 }
