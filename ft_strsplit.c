@@ -6,7 +6,7 @@
 /*   By: dbauduin <dbauduin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/13 00:54:18 by dbauduin          #+#    #+#             */
-/*   Updated: 2017/04/16 07:17:43 by dbauduin         ###   ########.fr       */
+/*   Updated: 2017/04/18 22:10:20 by dbauduin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ char			**ft_strsplit(char const *s, char c)
 
 	if (!s)
 		return (NULL);
-	if (!(tab = (char **)malloc(sizeof(char *) * count_words(s, c) + 1)))
+	if (!(tab = (char **)malloc(sizeof(char *) * (count_words(s, c) + 1))))
 		return (NULL);
 	i = 0;
 	while (*s)
