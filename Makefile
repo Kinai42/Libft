@@ -6,13 +6,13 @@
 #    By: dbauduin <dbauduin@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/04/16 02:53:24 by dbauduin          #+#    #+#              #
-#    Updated: 2017/04/19 20:01:57 by dbauduin         ###   ########.fr        #
+#    Updated: 2017/05/11 21:38:22 by dbauduin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC		=	gcc
 
-CFLAGS	=	-I./include -Wall -Werror -Wextra
+FLAGS	=	-I./include -Wall -Werror -Wextra
 
 RM		=	/bin/rm
 
@@ -82,23 +82,23 @@ SRC		=	ft_isalpha.c\
 			ft_isupper.c\
 			ft_islower.c\
 			ft_str_capitalize.c\
+			ft_tablen.c\
+			Get_next_line.c\
 
 OBJ		=	$(subst .c,.o,$(SRC))
 
-RED		=	@echo "\033[31m Clean\n\033[0m"
-GREEN	=	@echo "\033[32m Compile\033[0m"
-
 $(NAME)	:
-	@$(CC) -c $(CFLAGS) $(SRC)
+	@$(CC) -I ./includes -c $(SRC)
 	@ar rc $(NAME) $(OBJ)
 	@ranlib $(NAME)
-	$(GREEN)
+	@rm $(OBJ)
+	@echo "\033[32mFdF compiled	[ ✔ ]\033[0m"
 
 all		:	$(NAME)
 
 clean	:
 	@$(RM) -rf $(OBJ)
-	$(RED)
+	@echo "\033[32mFdF cleaned	[ ✔ ]\033[0m"
 
 fclean	:	clean
 	@$(RM) -rf $(NAME)

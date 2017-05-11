@@ -1,18 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putchar.c                                       :+:      :+:    :+:   */
+/*   tablen.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dbauduin <dbauduin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/04/14 15:15:58 by dbauduin          #+#    #+#             */
-/*   Updated: 2017/04/14 15:16:50 by dbauduin         ###   ########.fr       */
+/*   Created: 2017/05/08 21:10:07 by dbauduin          #+#    #+#             */
+/*   Updated: 2017/05/08 21:10:22 by dbauduin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-
-void	ft_putchar(char c)
+int			ft_tablen(char **tab)
 {
-	write(1, &c, 1);
+	int		size;
+
+	size = 0;
+	while (tab[size])
+		size++;
+	return (size);
 }

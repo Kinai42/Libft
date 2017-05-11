@@ -6,7 +6,7 @@
 /*   By: dbauduin <dbauduin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/16 03:06:30 by dbauduin          #+#    #+#             */
-/*   Updated: 2017/04/16 03:06:33 by dbauduin         ###   ########.fr       */
+/*   Updated: 2017/05/10 20:30:23 by dbauduin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,17 @@
 # include <unistd.h>
 # include <string.h>
 # include <stdlib.h>
+# include <fcntl.h>
+# include <sys/types.h>
+# include <sys/uio.h>
+# define BUFF_SIZE 5
+
+typedef struct		s_slot
+{
+	char			*save;
+	int				fd;
+	struct s_slot	*next;
+}					t_slot;
 
 typedef struct		s_list
 {
@@ -88,5 +99,7 @@ void				ft_strclr(char *s);
 void				ft_strdel(char **as);
 void				ft_striter(char *s, void (*f)(char *));
 void				ft_striteri(char *s, void (*f)(unsigned int, char *));
+int					ft_tablen(char **tab);
+int					get_next_line(const int fd, char **line);
 
 #endif
