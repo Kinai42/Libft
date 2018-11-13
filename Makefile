@@ -3,104 +3,64 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: dbauduin <dbauduin@student.42.fr>          +#+  +:+       +#+         #
+#    By: Damien <dbauduin@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2017/04/16 02:53:24 by dbauduin          #+#    #+#              #
-#    Updated: 2017/05/11 21:38:22 by dbauduin         ###   ########.fr        #
+#    Created: 2018/01/28 15:45:11 by Damien            #+#    #+#              #
+#    Updated: 2018/01/28 15:45:15 by Damien           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-CC		=	gcc
+include .misc/make/color
+include .misc/make/paths
+include .misc/make/misc_var
 
-FLAGS	=	-I./include -Wall -Werror -Wextra
+.SILENT	: __START	NAME	clean fclean all re object library os_dep libft
+.PHONY	: __START			clean fclean all re object library os_dep libft
 
-RM		=	/bin/rm
+.DEFAULT_GOAL = __START
 
-NAME	=	libft.a
+PROJECT	=	LIBFT
 
-SRC		=	ft_isalpha.c\
-			ft_isalnum.c\
-			ft_isascii.c\
-			ft_isprint.c\
-			ft_isdigit.c\
-			ft_atoi.c\
-			ft_strcat.c\
-			ft_strcmp.c\
-			ft_strcpy.c\
-			ft_strdup.c\
-			ft_strlen.c\
-			ft_strncat.c\
-			ft_strncmp.c\
-			ft_strncpy.c\
-			ft_strstr.c\
-			ft_strlcat.c\
-			ft_memset.c\
-			ft_memcpy.c\
-			ft_bzero.c\
-			ft_memccpy.c\
-			ft_memchr.c\
-			ft_memcmp.c\
-			ft_memmove.c\
-			ft_strchr.c\
-			ft_strnstr.c\
-			ft_tolower.c\
-			ft_toupper.c\
-			ft_strrchr.c\
-			ft_putnbr_fd.c\
-			ft_putendl_fd.c\
-			ft_putstr_fd.c\
-			ft_putchar_fd.c\
-			ft_putnbr.c\
-			ft_putendl.c\
-			ft_putstr.c\
-			ft_putchar.c\
-			ft_itoa.c\
-			ft_strsplit.c\
-			ft_strtrim.c\
-			ft_strjoin.c\
-			ft_strsub.c\
-			ft_strnequ.c\
-			ft_strequ.c\
-			ft_strmapi.c\
-			ft_strmap.c\
-			ft_striteri.c\
-			ft_striter.c\
-			ft_strclr.c\
-			ft_strdel.c\
-			ft_strnew.c\
-			ft_memdel.c\
-			ft_memalloc.c\
-			ft_cleaner.c\
-			ft_strrlen.c\
-			ft_digitlen.c\
-			ft_lstnew.c\
-			ft_lstdelone.c\
-			ft_lstdel.c\
-			ft_lstadd.c\
-			ft_lstiter.c\
-			ft_lstmap.c\
-			ft_isupper.c\
-			ft_islower.c\
-			ft_str_capitalize.c\
-			ft_tablen.c\
-			Get_next_line.c\
+CC		?=	clang
+CC_FLAG ?=	-Werror \
+			-Wall	\
+			-Wextra \
 
-OBJ		=	$(subst .c,.o,$(SRC))
+NAME	?=	libft.a
 
-$(NAME)	:
-	@$(CC) -I ./includes -c $(SRC)
-	@ar rc $(NAME) $(OBJ)
+SRC		= $(SRC_W)
+
+OBJ		:=	$(notdir $(SRC:.c=.o))
+
+OBJ_P	=	$(addprefix $(P_OBJ)/,$(OBJ))
+
+__START: os all
+	 printf "$(OK)[+][$(PROJECT)] Done$(C_DEF)\n"
+
+all:	$(NAME)
+
+$(NAME):  $(SRC)
+	@make library --no-print-directory
+
+clean:
+	rm		-f	$(OBJ_W)
+
+fclean:		clean
+	rm		-f	$(NAME)
+
+re:			fclean all
+
+object:	$(SRC) $(P_SRC) $(P_OBJ)
+	$(foreach SOURCE, $(SRC), \
+		$(CC) $(CC_FLAG) -I $(P_INCLUDE) -c $(SOURCE) -o $(P_OBJ)/$(notdir $(SOURCE:.c=.o))	&& \
+		printf "$(OK)[+][$(PROJECT)] $(SOURCE)$(C_DEF)" && sleep $(SLEEP)	&& \
+		printf "\r\033[K" \
+	;)
+	printf "$(OK)[+][$(PROJECT)] Objects are made in ./$(P_OBJ)$(C_DEF)\n"
+
+library:	object $(P_OBJ) $(OBJ_P)
+	@ar rc $(NAME) $(OBJ_W)
 	@ranlib $(NAME)
-	@rm $(OBJ)
-	@echo "\033[32mFdF compiled	[ ✔ ]\033[0m"
 
-all		:	$(NAME)
-
-clean	:
-	@$(RM) -rf $(OBJ)
-	@echo "\033[32mFdF cleaned	[ ✔ ]\033[0m"
-
-fclean	:	clean
-	@$(RM) -rf $(NAME)
-
-re		:	fclean all
+os_dep:
+	printf "[$(PROJECT)] Os dependent stufs\n"
